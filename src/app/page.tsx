@@ -1,12 +1,19 @@
-import { getServerSession } from 'next-auth/next'
-import { authOptions } from '@/lib/auth'
-import { redirect } from 'next/navigation'
+// src/app/page.tsx
+
+// **CORRECCIÓN CLAVE:** Importar getServerSession de la manera estándar para NextAuth v5 en App Router.
+// Si la sugerencia sigue indicando "import getServerSession from 'next-auth'", ignora la sugerencia y usa la siguiente línea.
+import getServerSession from 'next-auth'; // This is for NextAuth v5 (App Router)
+
+// **CORRECCIÓN:** Asegura la ruta correcta para authOptions.
+// Basado en tu estructura de archivos, está en src/app/api/auth/[...nextauth]/auth.config.ts
+import { authOptions } from '@/app/api/auth/[...nextauth]/auth.config';
+import { redirect } from 'next/navigation';
 
 export default async function Home(): Promise<JSX.Element> {
-  const session = await getServerSession(authOptions)
+  const session = await getServerSession(authOptions);
 
   if (!session) {
-    redirect('/login')
+    redirect('/login');
   }
 
   return (
@@ -15,7 +22,7 @@ export default async function Home(): Promise<JSX.Element> {
         <h1 className="text-4xl font-bold text-center mb-8">
           Bienvenido a PromptMaestro
         </h1>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="p-6 border rounded-lg shadow-lg">
             <h2 className="text-xl font-semibold mb-4">Mis Prompts</h2>
@@ -34,5 +41,5 @@ export default async function Home(): Promise<JSX.Element> {
         </div>
       </div>
     </main>
-  )
+  );
 }
