@@ -9,8 +9,8 @@
     "lint": "next lint",
     "test": "jest",
     "e2e": "playwright test",
-    "postinstall": "prisma generate", 
-    "postbuild": "prisma migrate deploy" 
+    "postinstall": "prisma generate",
+    "postbuild": "prisma migrate deploy"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.9.1",
@@ -23,13 +23,16 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.40.1",
-    "@prisma/client": "^6.8.2", 
+    "@prisma/client": "^6.8.2",
+    "@testing-library/jest-dom": "^6.1.5",
     "@testing-library/react": "^14.1.2",
     "@types/bcryptjs": "^2.4.6",
     "@types/jest": "^29.5.11",
     "@types/node": "^20.10.4",
     "@types/react": "^18.2.42",
     "@types/react-dom": "^18.2.17",
+    "@typescript-eslint/eslint-plugin": "^6.x.x",  
+    "@typescript-eslint/parser": "^6.x.x",        
     "autoprefixer": "^10.4.16",
     "eslint": "^8.55.0",
     "eslint-config-next": "14.0.3",
@@ -38,6 +41,6 @@
     "postcss": "^8.4.32",
     "prisma": "^6.8.2",
     "tailwindcss": "^3.3.0",
-    "typescript": "^5.3.3" 
+    "typescript": "^5.3.3"
   }
 }
