@@ -1,16 +1,11 @@
 // src/app/page.tsx
 
-// **CORRECCIÓN CLAVE:** Importar getServerSession de la manera estándar para NextAuth v5 en App Router.
-// Si la sugerencia sigue indicando "import getServerSession from 'next-auth'", ignora la sugerencia y usa la siguiente línea.
-import getServerSession from 'next-auth'; // This is for NextAuth v5 (App Router)
-
-// **CORRECCIÓN:** Asegura la ruta correcta para authOptions.
-// Basado en tu estructura de archivos, está en src/app/api/auth/[...nextauth]/auth.config.ts
-import { authOptions } from '@/app/api/auth/[...nextauth]/auth.config';
+// Import auth from our local auth.ts file which is configured for NextAuth v5
+import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
 
 export default async function Home(): Promise<JSX.Element> {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
 
   if (!session) {
     redirect('/login');
