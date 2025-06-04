@@ -31,18 +31,20 @@ export default function Login(): JSX.Element {
         router.push('/')
         router.refresh()
       }
-    } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (_error) {
       setError('Ocurrió un error al iniciar sesión')
     } finally {
       setIsLoading(false)
     }
   }
 
-  const handleGoogleSignIn = async () => {
+  const handleGoogleSignIn = async (): Promise<void> => {
     setIsLoading(true)
     try {
       await signIn('google', { callbackUrl: '/' })
-    } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (_error) {
       setError('Error al iniciar sesión con Google')
       setIsLoading(false)
     }

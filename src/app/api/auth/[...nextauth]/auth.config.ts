@@ -1,12 +1,12 @@
 import { PrismaAdapter } from '@auth/prisma-adapter';
 // CORRECCIÓN: Usar 'import type' para NextAuthOptions
-import type { NextAuthOptions } from 'next-auth';
+import type { NextAuthConfig } from 'next-auth'; // Trying NextAuthConfig
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 import { prisma } from '@/lib/prisma';
 import { compare } from 'bcryptjs';
 
-export const authOptions: NextAuthOptions = {
+export const authOptions: NextAuthConfig = { // Trying NextAuthConfig
   adapter: PrismaAdapter(prisma),
   session: {
     strategy: 'jwt'
@@ -29,7 +29,7 @@ export const authOptions: NextAuthOptions = {
 
         const user = await prisma.user.findUnique({
           where: {
-            email: credentials.email
+            email: credentials.email as string
           }
         });
 
@@ -38,7 +38,7 @@ export const authOptions: NextAuthOptions = {
           throw new Error('Usuario no encontrado o contraseña no establecida');
         }
 
-        const isValid = await compare(credentials.password, user.password);
+        const isValid = await compare(credentials.password as string, user.password);
 
         if (!isValid) {
           throw new Error('Contraseña incorrecta');
